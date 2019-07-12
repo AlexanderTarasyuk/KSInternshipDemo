@@ -1,22 +1,18 @@
 package com.example.android.ksinternshipdemo;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
+
+import com.example.android.ksinternshipdemo.adapter.ViewPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
-    private AppCompatButton btnAdd;
-    private AppCompatButton btnRemove;
-    private AppCompatButton btnReplace;
-    private SwitchCompat backstackSwitch;
+    private ViewPager viewPager;
+    private ViewPagerAdapter adapter;
 
     private FragmentOne fragmentOne;
     private FragmentTwo fragmentTwo;
@@ -34,63 +30,17 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Image viewer");
 
-        btnAdd = findViewById(R.id.btn_add);
-        btnRemove = findViewById(R.id.btn_remove);
-        btnReplace = findViewById(R.id.btn_replace);
-        backstackSwitch = findViewById(R.id.backstack_switch);
+        viewPager = findViewById(R.id.view_pager);
+        adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         fragmentOne = new FragmentOne();
         fragmentTwo = new FragmentTwo();
 
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addFragment(fragmentOne);
-            }
-        });
+        adapter.addFragment(fragmentOne, "Fragment One");
+        adapter.addFragment(fragmentTwo, "FragmentTwo");
 
-        btnReplace.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                replaceFragment(fragmentTwo);
-            }
-        });
+        viewPager.setAdapter(adapter);
 
-        btnRemove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                removeFragment(fragmentOne);
-            }
-        });
-
-
-    }
-
-    private void addFragment(Fragment fragment) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.fragment_container, fragment);
-        if (backstackSwitch.isChecked()) {
-            transaction.addToBackStack(null);
-        }
-        transaction.commit();
-    }
-
-    private void removeFragment(Fragment fragment) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.remove(fragment);
-        if (backstackSwitch.isChecked()) {
-            transaction.addToBackStack(null);
-        }
-        transaction.commit();
-    }
-
-    private void replaceFragment(Fragment fragment) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment);
-        if (backstackSwitch.isChecked()) {
-            transaction.addToBackStack(null);
-        }
-        transaction.commit();
     }
 
 
