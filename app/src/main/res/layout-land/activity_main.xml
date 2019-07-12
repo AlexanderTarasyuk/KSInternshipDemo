@@ -21,16 +21,29 @@
 
     </android.support.design.widget.AppBarLayout>
 
+
     <fragment
-        android:id="@+id/fragment_one"
         android:name="com.example.android.ksinternshipdemo.FragmentChooser"
-        android:layout_width="0dp"
+        android:id="@+id/fragment_one"
+        android:layout_width="250dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_bar" />
+
+    <fragment
+        android:id="@+id/fragment_two"
+        android:name="com.example.android.ksinternshipdemo.FragmentViewer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintStart_toEndOf="@+id/fragment_one"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/app_bar" />
 
 

@@ -1,23 +1,23 @@
 package com.example.android.ksinternshipdemo;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
+import android.support.annotation.DrawableRes;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
-import com.example.android.ksinternshipdemo.adapter.ViewPagerAdapter;
+import com.example.android.ksinternshipdemo.llisteners.PictureSelectListener;
 
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
-    private ViewPager viewPager;
-    private ViewPagerAdapter adapter;
-    private TabLayout tabLayout;
 
-    private FragmentOne fragmentOne;
-    private FragmentTwo fragmentTwo;
+    private FragmentChooser fragmentChooser;
+    private FragmentViewer fragmentViewer;
+    private PictureSelectListener pictureSelectListener;
+
+    boolean inLandscapeMode;
 
     private final static String LOG_TAG = MainActivity.class.getSimpleName();
 
@@ -29,23 +29,51 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
+        inLandscapeMode = findViewById(R.id.fragment_two) != null;
+
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Image viewer");
 
-        viewPager = findViewById(R.id.view_pager);
-        adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        fragmentChooser = (FragmentChooser) getSupportFragmentManager().findFragmentById(R.id.fragment_one);
+        if (inLandscapeMode) {
+            fragmentViewer = (FragmentViewer) getSupportFragmentManager().findFragmentById(R.id.fragment_two);
+        }
 
-        fragmentOne = new FragmentOne();
-        fragmentTwo = new FragmentTwo();
+        pictureSelectListener = new PictureSelectListener() {
+            @Override
+            public void onCatSelected() {
+                displaySelected(R.drawable.cat);
+            }
 
-        adapter.addFragment(fragmentOne, "Fragment One");
-        adapter.addFragment(fragmentTwo, "Fragment Two");
+            @Override
+            public void onFoodSelected() {
+                displaySelected(R.drawable.food);
+            }
 
-        viewPager.setAdapter(adapter);
+            @Override
+            public void onSunsetSelected() {
+                displaySelected(R.drawable.sunset);
+            }
 
-        tabLayout = findViewById(R.id.sliding_tabs);
-        tabLayout.setupWithViewPager(viewPager);
+            @Override
+            public void onSpaceSelected() {
+                displaySelected(R.drawable.space);
+            }
+        };
 
+        fragmentChooser.setPictureSelectListener(pictureSelectListener);
+
+    }
+
+    private void displaySelected(@DrawableRes int selectedImageResId) {
+
+        if (inLandscapeMode) {
+            fragmentViewer.displayResource(selectedImageResId);
+        } else {
+            Intent viewIntent = new Intent(MainActivity.this, SecondActivity.class);
+            viewIntent.putExtra("KEY_RESID", selectedImageResId);
+            startActivity(viewIntent);
+        }
     }
 
 
@@ -53,15 +81,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         Log.d(LOG_TAG, "onSaveInstanceState()");
-
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        // This One Called after "onStart()". "savedInstanceState" guaranteed not to be null.
         super.onRestoreInstanceState(savedInstanceState);
         Log.d(LOG_TAG, "onRestoreInstanceState()");
-
     }
 
     @Override

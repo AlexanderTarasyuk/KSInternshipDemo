@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".SecondActivity">
 
     <android.support.design.widget.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/app_bar"
@@ -22,8 +22,8 @@
     </android.support.design.widget.AppBarLayout>
 
     <fragment
-        android:id="@+id/fragment_one"
-        android:name="com.example.android.ksinternshipdemo.FragmentChooser"
+        android:id="@+id/fragment_two"
+        android:name="com.example.android.ksinternshipdemo.FragmentViewer"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"

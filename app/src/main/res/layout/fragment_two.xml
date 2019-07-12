@@ -4,17 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_blue_light"
-    tools:context=".FragmentTwo">
+    tools:context=".FragmentViewer">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/image_view"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Fragment2"
-        android:textSize="40dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

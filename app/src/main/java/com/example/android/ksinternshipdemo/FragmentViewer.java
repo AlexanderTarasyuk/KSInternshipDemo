@@ -3,6 +3,7 @@ package com.example.android.ksinternshipdemo;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.AppCompatImageView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +12,11 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentTwo extends Fragment {
+public class FragmentViewer extends Fragment {
 
+    private AppCompatImageView imageView;
 
-    public FragmentTwo() {
+    public FragmentViewer() {
         // Required empty public constructor
     }
 
@@ -22,8 +24,13 @@ public class FragmentTwo extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_two, container, false);
+        View v = inflater.inflate(R.layout.fragment_two, container, false);
+        imageView = v.findViewById(R.id.image_view);
+        return v;
+    }
+
+    public void displayResource(int resId) {
+        imageView.setImageResource(resId);
     }
 
 }
