@@ -21,13 +21,19 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <android.support.design.widget.TabLayout
+        android:id="@+id/sliding_tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/app_bar" />
+
 
     <android.support.v4.view.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/app_bar"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sliding_tabs">
 
     </android.support.v4.view.ViewPager>
 
@@ -35,12 +41,12 @@
     <!--</FrameLayout>-->
 
     <!--<fragment-->
-        <!--android:name="com.example.android.ksinternshipdemo.FragmentOne"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/linearLayout" />-->
+    <!--android:name="com.example.android.ksinternshipdemo.FragmentOne"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_marginBottom="8dp"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--app:layout_constraintTop_toBottomOf="@+id/linearLayout" />-->
 
 
 </android.support.constraint.ConstraintLayout>

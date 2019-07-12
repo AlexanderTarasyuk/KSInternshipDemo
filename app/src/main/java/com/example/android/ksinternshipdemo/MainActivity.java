@@ -1,6 +1,7 @@
 package com.example.android.ksinternshipdemo;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
+    private TabLayout tabLayout;
 
     private FragmentOne fragmentOne;
     private FragmentTwo fragmentTwo;
@@ -37,9 +39,12 @@ public class MainActivity extends AppCompatActivity {
         fragmentTwo = new FragmentTwo();
 
         adapter.addFragment(fragmentOne, "Fragment One");
-        adapter.addFragment(fragmentTwo, "FragmentTwo");
+        adapter.addFragment(fragmentTwo, "Fragment Two");
 
         viewPager.setAdapter(adapter);
+
+        tabLayout = findViewById(R.id.sliding_tabs);
+        tabLayout.setupWithViewPager(viewPager);
 
     }
 
