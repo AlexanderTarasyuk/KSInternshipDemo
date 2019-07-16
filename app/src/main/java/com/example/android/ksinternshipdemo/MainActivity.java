@@ -34,9 +34,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Image viewer");
+        toolbar.setTitle("Android Lists");
 
-        tasksListView = (ListView) findViewById(R.id.list_view);
+        tasksListView = findViewById(R.id.list_view);
 
         items = new ArrayList<>();
 
