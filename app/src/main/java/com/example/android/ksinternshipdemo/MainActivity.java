@@ -1,6 +1,7 @@
 package com.example.android.ksinternshipdemo;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<TaskItem> items;
     TaskRecyclerAdapter adapter;
+    FloatingActionButton addBtn;
 
     private final static String LOG_TAG = MainActivity.class.getSimpleName();
 
@@ -36,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Android Lists");
 
-        recyclerView = (RecyclerView) findViewById(R.id.rv_recycler);
+        recyclerView = findViewById(R.id.rv_recycler);
+        addBtn = findViewById(R.id.fab_add);
 
         items = new ArrayList<>();
 
@@ -70,6 +73,16 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(items != null && adapter != null) {
+                    items.add(new TaskItem(true, "NEW TASK", TaskItem.Type.PLACE, "13:00", "15/05/2017"));
+                    adapter.notifyDataSetChanged();
+                    //recyclerView.smoothScrollToPosition(recyclerView.getBottom());
+                }
+            }
+        });
 
     }
 
