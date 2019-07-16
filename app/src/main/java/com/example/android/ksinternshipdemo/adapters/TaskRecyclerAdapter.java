@@ -55,6 +55,12 @@ public class TaskRecyclerAdapter extends RecyclerView.Adapter<TaskRecyclerAdapte
                 break;
         }
 
+        if (position == items.size() - 1) {
+            holder.divider.setVisibility(View.INVISIBLE);
+        } else {
+            holder.divider.setVisibility(View.VISIBLE);
+        }
+
     }
 
     @Override
@@ -69,6 +75,7 @@ public class TaskRecyclerAdapter extends RecyclerView.Adapter<TaskRecyclerAdapte
         ImageView taskTypeImage;
         TextView taskTime;
         TextView taskDate;
+        View divider;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -80,6 +87,7 @@ public class TaskRecyclerAdapter extends RecyclerView.Adapter<TaskRecyclerAdapte
             taskTypeImage = itemView.findViewById(R.id.item_task_type_icon);
             taskTime = itemView.findViewById(R.id.item_task_alarm_time);
             taskDate = itemView.findViewById(R.id.item_task_alarm_date);
+            divider = itemView.findViewById(R.id.divider);
 
         }
     }
