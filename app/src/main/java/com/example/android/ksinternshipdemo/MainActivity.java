@@ -1,13 +1,16 @@
 package com.example.android.ksinternshipdemo;
 
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 
 import com.example.android.ksinternshipdemo.adapters.TaskRecyclerAdapter;
+import com.example.android.ksinternshipdemo.listeners.OnTaskRecyclerItemClickListener;
 import com.example.android.ksinternshipdemo.models.TaskItem;
 
 import java.util.ArrayList;
@@ -52,6 +55,17 @@ public class MainActivity extends AppCompatActivity {
         items.add(new TaskItem(true, "Впихнуть невпихуемое", TaskItem.Type.PLACE, "13:00", "15/05/2017"));
 
         adapter = new TaskRecyclerAdapter(items, this);
+
+        adapter.setListener(new OnTaskRecyclerItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                new AlertDialog.Builder(MainActivity.this)
+                        .setTitle("Full task name")
+                        .setMessage(adapter.getItems().get(position).getTaskName())
+                        .setCancelable(true)
+                        .create().show();
+            }
+        });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);

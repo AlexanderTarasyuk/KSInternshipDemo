@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.android.ksinternshipdemo.R;
+import com.example.android.ksinternshipdemo.listeners.OnTaskRecyclerItemClickListener;
 import com.example.android.ksinternshipdemo.models.TaskItem;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 public class TaskRecyclerAdapter extends RecyclerView.Adapter<TaskRecyclerAdapter.ViewHolder> {
 
     private ArrayList<TaskItem> items;
+    private OnTaskRecyclerItemClickListener listener;
     private Context ctx;
 
     public TaskRecyclerAdapter(ArrayList<TaskItem> items, Context ctx) {
@@ -30,7 +32,16 @@ public class TaskRecyclerAdapter extends RecyclerView.Adapter<TaskRecyclerAdapte
     @Override
     public TaskRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.main_list_item, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
+        final ViewHolder viewHolder = new ViewHolder(view);
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (listener != null) {
+                    listener.onItemClick(view, viewHolder.getAdapterPosition());
+                }
+            }
+        });
 
 
         return viewHolder;
@@ -92,4 +103,20 @@ public class TaskRecyclerAdapter extends RecyclerView.Adapter<TaskRecyclerAdapte
         }
     }
 
+
+    public OnTaskRecyclerItemClickListener getListener() {
+        return listener;
+    }
+
+    public void setListener(OnTaskRecyclerItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    public ArrayList<TaskItem> getItems() {
+        return items;
+    }
+
+    public void setItems(ArrayList<TaskItem> items) {
+        this.items = items;
+    }
 }
